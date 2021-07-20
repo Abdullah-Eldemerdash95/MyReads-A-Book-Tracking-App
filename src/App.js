@@ -63,8 +63,9 @@ if (query.length > 0) {
       if (books.error) { // to handle invaild queries 
         this.setState({ showingBooks: [] });
         } else {
-          books.filter((b) => (b.title.toLowerCase().includes(query.toLowerCase()))||(b.authors.join(',').toLowerCase().includes(query.toLowerCase())));
-          this.setState({ showingBooks: books });
+  books.map(book => {if (this.state.books.some(b => b.id === book.id)){book.shelf = this.state.books.find(x => x.id === book.id).shelf} return book});
+  books.filter((b) => (b.title.toLowerCase().includes(query.toLowerCase()))||(b.authors.join(',').toLowerCase().includes(query.toLowerCase())));
+  this.setState({ showingBooks: books });
         }
       });
     } else {
