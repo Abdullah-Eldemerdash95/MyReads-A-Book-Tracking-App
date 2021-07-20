@@ -71,8 +71,7 @@ if (query.length > 0) {
       <div className="app">
         <Switch>{/* switch is for to tell the router to stop matching further once it matches a route */}
        <Route exact path='/search' render={() => (
-       <Search 
-       books={this.state.books}  
+       <Search  
        showingBooks={this.state.showingBooks}  
        query={this.state.query} 
        changeShelfInSearch={this.changeShelf}
