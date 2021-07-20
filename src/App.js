@@ -31,22 +31,6 @@ clearQuery = () => {// this is the function responsible for clearing value of se
   // all new data of books needed to be send to shelves comp so we will pass it as props
   )}
 
-// we followed in this section method that we got in classroom 
-    // we tried more than  way to get to best result of how we change shelf in normal and search bar 
-  /* // THIS WAY is working but needs refresh when u move book to shelf in search page cause books may not have shelf prop in them 
-     //plus we use map to edit the one we have but how we add new one if we not have this one inside by determine this new one and add
-     if i'm going use map i need to search first is this one here or no but even i tried i didn't catch what missing 
-     // 1st 
-changeShelf = (chosenBook, shelf) => {BooksAPI.update(chosenBook, shelf).then(res => {console.log(res)});
-chosenBook.shelf = shelf;this.setState((prevState) => ({ books: prevState.books.map((book) => {if (book.id === chosenBook.id) {book.shelf = shelf} 
-else { chosenBook.shelf = shelf; return book } return book})}))}
-    // 2nd don't what it's missing if u can evalute that's will be great
-changeShelf = (chosenBook, shelf) => {BooksAPI.update(chosenBook, shelf).then(res => {console.log(res)})
-var found = false;
-this.books.map(book => {if (book.id === chosenBook.id) {(found = true) ? 
-(this.setState((prevState) => ({ books: prevState.books.map((book) => {{book.shelf = shelf} return book})}))) : 
-(chosenBook.shelf = shelf, this.setState({ books: [...this.state.books].concat(book)}))}})}
-  */
 changeShelf = (chosenBook, shelf) => {
   BooksAPI.update(chosenBook, shelf).then(res => {
    console.log(res)});
@@ -62,7 +46,7 @@ if (query.length > 0) {
     BooksAPI.search(query).then(books => {
       if (books.error) { // to handle invaild queries 
         this.setState({ showingBooks: [] });
-        } else {
+        } else {// the book.map for fixing search page auto value of selected shelves by check books that coming from api if any of it is in main we update shelf attribute 
   books.map(book => {if (this.state.books.some(b => b.id === book.id)){book.shelf = this.state.books.find(x => x.id === book.id).shelf} return book});
   books.filter((b) => (b.title.toLowerCase().includes(query.toLowerCase()))||(b.authors.join(',').toLowerCase().includes(query.toLowerCase())));
   this.setState({ showingBooks: books });
